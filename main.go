@@ -1,14 +1,18 @@
 package main
 
 import (
+  "github.com/ant0ine/go-json-rest/rest"
+  "log"
   "net/http"
 )
 
 func main() {
-  http.HandleFunc("/", hello)
-  http.ListenAndServe(":8080", nil)
+  api := rest.NewApi()
+  api.Use(rest.DefaultDevStack...)
+  api.SetApp(rest.AppSimple(hello))
+  log.Fatal(http.ListenAndServe(":8080", api.MakeHandler()))
 }
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("hello world!"))
+func hello(w rest.ResponseWriter, r *rest.Request) {
+  w.WriteJson(map[string]string{"Body": "Hello World!"})
 }

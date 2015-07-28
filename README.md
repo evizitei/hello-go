@@ -26,5 +26,5 @@ Find your address with
 $> dinghy ip
 ```
 
-You should be able to see "hello world!" returned in the browser by
+You should be able to see json output containing "hello world!" returned in the browser by
 visiting "http://dinghy-ip:6060".
